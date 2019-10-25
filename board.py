@@ -44,7 +44,7 @@ class Board:
         output += "\n"
         for i in range(length):
             output += sep + " "
-        print output
+        print(output)
 
     def done(self):
         rows = self.board
