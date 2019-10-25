@@ -32,11 +32,10 @@ elif len(arguments) == 3:
                 d = y.done()
                 print(d)
         elif firstArg == "next":
-                rows = y.boardString.split("|")
+                rows = y.board
                 cars = []
                 for row in rows:
-                        cs = list(row)
-                        for car in cs:
+                        for car in row:
                                 if car not in cars and car != " ":
                                         cars.append(car)
                 for car in cars:
