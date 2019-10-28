@@ -157,6 +157,9 @@ class Board:
                             else:
                                 obstacle = True
 
+    def random(self):
+        pass
+
 if __name__ == '__main__':
     b = Board("  ooo |ppp q |xx  qa|rrr qa|b c dd|b c ee")
     rows = b.board

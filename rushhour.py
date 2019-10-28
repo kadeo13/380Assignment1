@@ -22,6 +22,8 @@ if len(arguments) == 2:
                 for car in cars:
                         x.next_for_car(car)
                 x.printBoards()
+        elif firstArg == "random":
+                x.random()
 elif len(arguments) == 3:
         firstArg = arguments[1]
         secArg = arguments[2]
