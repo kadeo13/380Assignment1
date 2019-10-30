@@ -6,6 +6,9 @@ from path import Path
 class Board:
     board = []
     boards = []
+    g = 0
+    h = 0
+    f = g + h
 
     def __init__(self, board):
         if type(board) is str:
@@ -290,21 +293,56 @@ class Board:
                     cars.append(car)
         visited = []
         queue = [start]
+        done = False
         while len(queue) != 0:
             node = queue.pop(0)
             visited.append(node)
             for car in cars:
-                nextPath = self.next_for_car(car, path.last())
+                nextPath = self.nextPath(car, path.last())
                 if nextPath != None:
                     check = Board(nextPath)
                     if check.done():
+                        done = True
                         return node
-                    if nextPath not in visited and nextPath not in queue:
+                    if nextPath not in visited:
                         path.add(nextPath)
                         queue.append(nextPath)
-        self.boards = path.path
         self.printBoards()
+        return len(path.path)
 
+    def getH(self):
+        board = self.board
+        for i in range(len(board)):
+            if "x" in board[i]:
+                for car in list(board[i]):
+                    return abs(list(board[i]).index(car) - len(list(board[i])) + 1)
+
+    def astar(self):
+        path = Path()
+        open = [copy.deepcopy(self.board)]
+        closed = []
+        i = 0
+        cars = []
+        for row in self.board:
+            for car in row:
+                if car not in cars and car != " ":
+                    cars.append(car)
+        while len(open) != 0:
+            node = open.pop(0)
+            h = self.getH()
+            g = i
+            f = h + g
+            i += 1
+            for car in cars:
+                nextPath = self.nextPath(car, path.last())
+                if nextPath not in closed:
+                    open.append(nextPath)
+                if h == 0:
+                    return node
+                else:
+                    closed.append(node)
+        self.printBoards()
+        print(len(self.boards))
 
 
 if __name__ == '__main__':
@@ -314,5 +352,4 @@ if __name__ == '__main__':
         for car in row:
             if car not in cars and car != " ":
                 cars.append(car)
-    node = b.bfs()
-    print(node)
+    b.astar()

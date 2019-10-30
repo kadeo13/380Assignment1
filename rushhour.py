@@ -25,6 +25,8 @@ if len(arguments) == 2:
                 x.random()
         elif firstArg == "bfs":
                 x.bfs()
+        elif firstArg == "astar":
+                x.astar()
 elif len(arguments) == 3:
         firstArg = arguments[1]
         secArg = arguments[2]
@@ -47,3 +49,5 @@ elif len(arguments) == 3:
                 y.random()
         elif firstArg == "bfs":
                 y.bfs()
+        elif firstArg == "astar":
+                y.astar()
